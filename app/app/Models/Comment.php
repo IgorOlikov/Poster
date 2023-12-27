@@ -30,7 +30,7 @@ class Comment extends Model
         return $this->hasMany(Comment::class,'parent_id','id');
     }
 
-    public function related_to_post(): BelongsTo
+    public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class,'post_id','id');
     }
