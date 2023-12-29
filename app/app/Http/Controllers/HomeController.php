@@ -14,12 +14,20 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        $comment = collect(Comment::all());
-        $post_id = collect(Post::all()->modelKeys());
-        //dd($comment);
-        $ppp = $post_id->random(); // [4,6,9]
-        $ccc = $comment->where('post_id','=',$ppp)->value('post_id');
-        dd($ppp,$ccc);
+     // $comment = collect(Comment::all());
+     // $post_id = collect(Post::all()->modelKeys());
+     // //dd($comment);
+     // $ppp = $post_id->random(); // [4,6,9]
+     // $ccc = $comment->where('post_id','=',$ppp)->value('post_id');
+     // dd($ppp,$ccc);
+        $collectz = User::factory(10)
+            ->has(Post::factory()
+                ->has(Comment::factory(10)->state(function (array $attributes, Post $post){
+                    return ['user_id' => $post->id];
+                })))->make();
+
+            dd($collectz);
+
 
 
    }
