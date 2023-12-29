@@ -17,12 +17,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::factory(10)->has(Post::factory())
-            ->create();
+      // $user = User::factory(10)
+      //     ->has(Post::factory())
+      //          ->has(Comment::factory(10)->for(Post::factory()->for(User::factory(),'owner'),'post'))
+      //     ->create(); // make
+        //
 
-        $this->call([
-            CommentTableSeeder::class,
-            ChildrenCommentTableSeeder::class,
+      //  $user = User::factory(10)
+      //      ->has(Post::factory())
+      //      ->has(Comment::factory(10)->for(Post::factory()->for(User::factory(),'owner'),'post'))
+      //      ->create(); // make
+        //
+       $colectz = collect(Post::all());
+
+        Comment::factory()->recycle($colectz)->create();
+
+
+           // User::factory()->recycle(Post::factory()->forOwner()->create())->create();
+
+
+
+
+                $this->call([
+           // CommentTableSeeder::class, // index 0- 100
+            //ChildrenCommentTableSeeder::class,
             ]);
 
     }

@@ -20,7 +20,7 @@ class ChildrenCommentTableSeeder extends Seeder
         $post_id = collect(Post::all()->modelKeys());
         $comment = collect(Comment::all());
 
-        for ($i = 0;$i < 200;$i++) {
+        for ($i = 0;$i < 10;$i++) {
             $data[] = [
 
                 'post_id' => $ppp = $post_id->random(), // [4,6,9]

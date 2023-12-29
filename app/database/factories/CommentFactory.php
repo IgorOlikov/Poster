@@ -24,8 +24,8 @@ class CommentFactory extends Factory
            // 'post_id' => Post::inRandomOrder()->first()->id,
            // //'parent_id' => Comment::factory()->count(1),
            //'user_id' => User::inRandomOrder()->first()->id,
-            'user_id' => User::factory(),
-            'post_id' => Post::factory()->forOwner(),
+           //'user_id' => User::factory(),
+           //'post_id' => Post::factory()->forOwner(),
             'comment' => fake()->text,
         ];
     }

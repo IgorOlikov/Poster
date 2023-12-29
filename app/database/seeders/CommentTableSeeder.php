@@ -17,14 +17,15 @@ class CommentTableSeeder extends Seeder
     {
         $data = [];
         $user_id = collect(User::all()->modelKeys());
-        $post_id = collect(Post::all()->modelKeys());
+        $post_id = collect(Post::all());
 
-        for ($i = 0;$i < 100;$i++) {
+        for ($z = 1,$i = 0;$i < 10;$i++,$z++) {
             $data[] = [
-                'user_id' => $user_id->random(),
-                'post_id' => $post_id->random(),
+                'user_id' => $id = $z,
+                'post_id' => $post_id->where('id','=',$id)->value('id'),
                 'comment' => fake()->text,
             ];
+            $z = 0;
         }
 
         foreach ($data as $comment) {
