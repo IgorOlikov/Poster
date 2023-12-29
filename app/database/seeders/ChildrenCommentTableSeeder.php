@@ -18,13 +18,13 @@ class ChildrenCommentTableSeeder extends Seeder
         $data = [];
         $user_id = collect(User::all()->modelKeys());
         $post_id = collect(Post::all()->modelKeys());
-        $comment = collect(Comment::all()->modelKeys());
+        $comment = collect(Comment::all());
 
-        for ($i = 0;$i < 10;$i++) {
+        for ($i = 0;$i < 200;$i++) {
             $data[] = [
 
                 'post_id' => $ppp = $post_id->random(), // [4,6,9]
-                'parent_id' => $comment->where('post_id','=',$ppp)->get('id'),
+                'parent_id' => $comment->where('post_id','=',$ppp)->value('id'),
                 'user_id' => $user_id->random(),
                 'comment' => fake()->text,
             ];

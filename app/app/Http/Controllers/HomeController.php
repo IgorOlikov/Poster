@@ -14,24 +14,12 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-      $comments = Comment::factory()->make();
-
-      $usersId = User::pluck('id');
-
-
-      $comments_user_id = $comments->pluck('user_id'); // 0-99 11114439990
-     // $comments_id  = $comme
-
-       $post = Post::pluck('user_id');
-
-
-
-
-            $post = $post->merge($post)->merge($post)->merge($post)->merge($post);
-           $post = $post->merge($post);
-
-          $www = $comments->replace($post);
-           dd($www);
+        $comment = collect(Comment::all());
+        $post_id = collect(Post::all()->modelKeys());
+        //dd($comment);
+        $ppp = $post_id->random(); // [4,6,9]
+        $ccc = $comment->where('post_id','=',$ppp)->value('post_id');
+        dd($ppp,$ccc);
 
 
    }
