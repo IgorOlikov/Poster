@@ -43,9 +43,9 @@ class DatabaseSeeder extends Seeder
                     return ['user_id' => $post->id];
                 })
 
-                ))->make();
+                ))->create();
 
-        dd($collectz->comments->first);  //user_id++ 1-999
+       // dd($collectz->comments->first);  //user_id++ 1-999
         //Comment::factory()->recycle(Post::factory()->create())->recycle(User::factory()->create())->create();
 
 

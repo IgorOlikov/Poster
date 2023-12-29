@@ -26,8 +26,7 @@ class HomeController extends Controller
                     return ['user_id' => $post->id];
                 })))->make();
 
-            dd($collectz);
-        // ПОХУЙ
+
 
 
    }
