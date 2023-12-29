@@ -31,6 +31,13 @@ class CommentTableSeeder extends Seeder
       //  }
       //
         //dd($comments_keys);
+        $user_size = User::count();
+
+
+
+       $spliced = $comments_keys->splice($user_size);
+
+        dd($spliced->all());
 
          foreach ($comments_keys as $comments_key => $key) {
              Comment::where('id','=',$key)->update(['user_id' => $key]);
