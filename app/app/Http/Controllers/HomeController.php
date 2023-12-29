@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Post;
 class HomeController extends Controller
@@ -12,10 +14,29 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        dd($request);
+      $comments = Comment::factory()->make();
+
+      $usersId = User::pluck('id');
 
 
-    }
+      $comments_user_id = $comments->pluck('user_id'); // 0-99 11114439990
+     // $comments_id  = $comme
+
+       $post = Post::pluck('user_id');
+
+
+
+
+            $post = $post->merge($post)->merge($post)->merge($post)->merge($post);
+           $post = $post->merge($post);
+
+          $www = $comments->replace($post);
+           dd($www);
+
+
+   }
+
+
 
     /**
      * Show the form for creating a new resource.

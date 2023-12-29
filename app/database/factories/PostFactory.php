@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -17,8 +18,8 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            //'user_id' => $this->for,
-            'title' => fake()->title,
+            //'user_id' => User::factory(),
+            'title' => ucfirst(fake()->words(mt_rand(2,5),true)),
             'body' => fake()->text,
         ];
     }

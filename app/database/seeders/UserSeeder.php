@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
      //      //->has(Post::factory()->count(3),'user_posts')
      //        ->has($post)
      //          ->create();
-    User::factory()->hasHasPosts(3)->create();
+    User::factory()->hasPosts(3)->create();
 
 
 

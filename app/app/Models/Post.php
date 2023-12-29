@@ -16,7 +16,7 @@ class Post extends Model
     protected $fillable = ['title','slug','body','user_id'];
 
 
-    public function post_owner(): BelongsTo
+    public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class,'user_id','id');
     }

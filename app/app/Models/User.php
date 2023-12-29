@@ -44,12 +44,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function Posts(): HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class,'user_id','id');
     }
 
-    public function Comments(): HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class,'user_id','id');
     }
