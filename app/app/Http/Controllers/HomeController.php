@@ -25,12 +25,18 @@ class HomeController extends Controller
 
         $trash = $comments_keys->splice($users_size);
 
-        for ($i = 0;$i < 3;$i++) {
-            $comments_keys = $comments_keys->merge($comments_keys);
-        }
+
+
+       for ($i = 0;$i < $users_size;$i++) {
+           $comments_keys = $comments_keys->concat($comments_keys);
+           if ($comments_keys->count() > $comments_size){
+               break;
+           }
+       }
+       $comments_keys = $comments_keys->take($comments_size);
         dd($comments_keys->all());
 
-        //$comments_keys->concat();
+
 
 
    }
