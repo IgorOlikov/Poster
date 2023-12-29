@@ -27,7 +27,7 @@ class HomeController extends Controller
                 })))->make();
 
             dd($collectz);
-
+        // ПОХУЙ
 
 
    }
