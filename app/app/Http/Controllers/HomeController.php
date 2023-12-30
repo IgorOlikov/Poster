@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request)
     {
 
@@ -30,30 +28,19 @@ class HomeController extends Controller
        $comments_keys = $comments_keys->take($comments_size);
 
         $collectc = collect(Comment::all());
-        $collectm = collect(Comment::all()->modelKeys());
-        $collectm = $collectm->keys();
 
-            foreach ($collectm as $item) {
+
+        $collectcmk = collect(Comment::all())->keys();
+
+            foreach ($collectcmk as $item) {
                 $collectc[$item]['user_id'] = $comments_keys[$item];
             }
-            //dd($collectc[99]);
-            $fields = $collectc->toArray();
-            dd($fields);
-            foreach ($collectc as $total_comments){
-                Comment::insert($fields);
-            }
 
+        $fields = $collectc->toArray();
 
-       //dd($comments_keys);
-      // foreach ($comments_keys as $comments_key) {
-      //  $wz =  Comment::where('id','!=',9999999)
-      //         ->update(['user_id' => $comments_key]);
-      //     print $comments_key;
-      //     // each()->update
-      // }
-
-      // dd($wz);
-
+        foreach ($collectc as $total_comments){
+            Comment::upsert($fields,'id',['user_id']);
+        }
 
    }
 

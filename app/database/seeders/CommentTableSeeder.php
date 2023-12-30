@@ -10,9 +10,6 @@ use App\Models\Comment;
 
 class CommentTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $comments_keys = collect(Comment::all()->modelKeys());
@@ -29,28 +26,20 @@ class CommentTableSeeder extends Seeder
             }
         }
         $comments_keys = $comments_keys->take($comments_size);
-        //dd($comments_keys->all());
-       // foreach ($comments_keys as $comments_key){
-       //    print $comments_key.PHP_EOL;
-       // }
-       // exit();
-     $db  = Comment::all();
-        dd($db);
-        //dd($comments_keys);
 
-     // foreach ($comments_keys as $comments_key) {
-     //     $x = 0;
-     //     Comment::where()->update(['user_id' => $comments_key]);
-     //     $x++;
-     // }
-     //    dd($x);
-      //  foreach ($comments as $comment){
-      //      $comment['user_id'] = $comment-
-      //  }
+        $collectc = collect(Comment::all());
 
 
-      // foreach ($data as $comment) {
-      //     Comment::insert($comment);
-      // }
+        $collectcmk = collect(Comment::all())->keys();
+
+        foreach ($collectcmk as $item) {
+            $collectc[$item]['user_id'] = $comments_keys[$item];
+        }
+
+        $fields = $collectc->toArray();
+
+        foreach ($collectc as $total_comments){
+            Comment::upsert($fields,'id',['user_id']);
+        }
     }
 }

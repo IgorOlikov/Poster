@@ -17,49 +17,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-      // $user = User::factory(10)
-      //     ->has(Post::factory())
-      //          ->has(Comment::factory(10)->for(Post::factory()->for(User::factory(),'owner'),'post'))
-      //     ->create(); // make
-        //
 
-      //  $user = User::factory(10)
-      //      ->has(Post::factory())
-      //      ->has(Comment::factory(10)->for(Post::factory()->for(User::factory(),'owner'),'post'))
-      //      ->create(); // make
-        //
-
-      //     //recycle
-      //  $colectz = collect(Post::all());
-      // Comment::factory()->recycle($colectz)->create();
-
-       // User::factory(10)->recycle(Comment::factory(10)->create())->create();
-
-        //User::factory()->hasPosts()->create(10);
-
-      $collectz = User::factory(10)
-            ->has(Post::factory()
-                ->has(Comment::factory(10)->state(function (array $attributes, Post $post){
-                    return ['user_id' => $post->id];
-                })
-
-                ))->create();
-
-       // dd($collectz->comments->first);  //user_id++ 1-999
-        //Comment::factory()->recycle(Post::factory()->create())->recycle(User::factory()->create())->create();
-
-
-           // User::factory()->recycle(Post::factory()->forOwner()->create())->create();
+       User::factory(10)  //users
+            ->has(Post::factory() //posts for 1 user
+                ->has(Comment::factory(10) // comments for 1 post
+                    ->state(function (array $attributes, Post $post){
+                                 return ['user_id' => $post->id];
+                })))->create();
 
 
 
-
-
-
-                $this->call([
-           // CommentTableSeeder::class, // index 0- 100
+       $this->call([
+            CommentTableSeeder::class, // index 0- 100
             //ChildrenCommentTableSeeder::class,
-            ]);
+       ]);
 
     }
 
