@@ -19,24 +19,40 @@ class HomeController extends Controller
         $comments_size = Comment::count();
         $users_size = User::count();
 
-
-        //dd($user_size);
-        //dd($comments_keys);  //COLLAPSE
-
         $trash = $comments_keys->splice($users_size);
 
-
-
-       for ($i = 0;$i < $users_size;$i++) {
+       for ($i = 0;$i < $comments_size;$i++) {
            $comments_keys = $comments_keys->concat($comments_keys);
            if ($comments_keys->count() > $comments_size){
                break;
            }
        }
        $comments_keys = $comments_keys->take($comments_size);
-        dd($comments_keys->all());
+
+        $collectc = collect(Comment::all());
+        $collectm = collect(Comment::all()->modelKeys());
+        $collectm = $collectm->keys();
+
+            foreach ($collectm as $item) {
+                $collectc[$item]['user_id'] = $comments_keys[$item];
+            }
+            //dd($collectc[99]);
+            $fields = $collectc->toArray();
+            dd($fields);
+            foreach ($collectc as $total_comments){
+                Comment::insert($fields);
+            }
 
 
+       //dd($comments_keys);
+      // foreach ($comments_keys as $comments_key) {
+      //  $wz =  Comment::where('id','!=',9999999)
+      //         ->update(['user_id' => $comments_key]);
+      //     print $comments_key;
+      //     // each()->update
+      // }
+
+      // dd($wz);
 
 
    }

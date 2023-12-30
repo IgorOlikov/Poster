@@ -15,34 +15,35 @@ class CommentTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [];
-        $user_id = collect(User::all()->modelKeys());
-        $post_id = collect(Post::all());
-        $comments = collect(Comment::all());
         $comments_keys = collect(Comment::all()->modelKeys());
 
+        $comments_size = Comment::count();
+        $users_size = User::count();
 
-      //  for ($i = 0;$i < Comment::count();$i++) {
-      //      $data[] = [
-      //          'user_id' => $comments_keys[0],
-      //          //'post_id' => $post_id->where('id','=',$id)->value('id'),
-      //          'comment' => fake()->text,
-      //      ];
-      //  }
-      //
+        $trash = $comments_keys->splice($users_size);
+
+        for ($i = 0;$i < $comments_size;$i++) {
+            $comments_keys = $comments_keys->concat($comments_keys);
+            if ($comments_keys->count() > $comments_size){
+                break;
+            }
+        }
+        $comments_keys = $comments_keys->take($comments_size);
+        //dd($comments_keys->all());
+       // foreach ($comments_keys as $comments_key){
+       //    print $comments_key.PHP_EOL;
+       // }
+       // exit();
+     $db  = Comment::all();
+        dd($db);
         //dd($comments_keys);
-        $user_size = User::count();
 
-
-
-       $spliced = $comments_keys->splice($user_size);
-
-        dd($spliced->all());
-
-         foreach ($comments_keys as $comments_key => $key) {
-             Comment::where('id','=',$key)->update(['user_id' => $key]);
-         }
-
+     // foreach ($comments_keys as $comments_key) {
+     //     $x = 0;
+     //     Comment::where()->update(['user_id' => $comments_key]);
+     //     $x++;
+     // }
+     //    dd($x);
       //  foreach ($comments as $comment){
       //      $comment['user_id'] = $comment-
       //  }
