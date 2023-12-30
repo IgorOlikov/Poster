@@ -12,6 +12,8 @@ class CommentTableSeeder extends Seeder
 {
     public function run(): void
     {
+
+
         $comments_keys = collect(Comment::all()->modelKeys());
 
         $comments_size = Comment::count();
@@ -27,19 +29,23 @@ class CommentTableSeeder extends Seeder
         }
         $comments_keys = $comments_keys->take($comments_size);
 
-        $collectc = collect(Comment::all());
+        //dd($comments_keys);
 
+        $collectc = collect(Comment::all());
 
         $collectcmk = collect(Comment::all())->keys();
 
+        //
+        $userid_arr= [];
+
         foreach ($collectcmk as $item) {
-            $collectc[$item]['user_id'] = $comments_keys[$item];
+            $userid_arr[$item]['user_id'] = $comments_keys[$item];
         }
 
-        $fields = $collectc->toArray();
-
-        foreach ($collectc as $total_comments){
-            Comment::upsert($fields,'id',['user_id']);
+        foreach ($userid_arr as $item => $value) {
+            $id = $item + 1; // 1...10000
+            Comment::where('id','=',$id)
+                ->update($userid_arr[$item]);
         }
     }
 }

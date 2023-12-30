@@ -11,7 +11,6 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-
         $comments_keys = collect(Comment::all()->modelKeys());
 
         $comments_size = Comment::count();
@@ -19,29 +18,32 @@ class HomeController extends Controller
 
         $trash = $comments_keys->splice($users_size);
 
-       for ($i = 0;$i < $comments_size;$i++) {
-           $comments_keys = $comments_keys->concat($comments_keys);
-           if ($comments_keys->count() > $comments_size){
-               break;
-           }
-       }
-       $comments_keys = $comments_keys->take($comments_size);
+        for ($i = 0;$i < $comments_size;$i++) {
+            $comments_keys = $comments_keys->concat($comments_keys);
+            if ($comments_keys->count() > $comments_size){
+                break;
+            }
+        }
+        $comments_keys = $comments_keys->take($comments_size);
+
+        //dd($comments_keys);
 
         $collectc = collect(Comment::all());
 
-
         $collectcmk = collect(Comment::all())->keys();
 
-            foreach ($collectcmk as $item) {
-                $collectc[$item]['user_id'] = $comments_keys[$item];
-            }
+        //
+        $userid_arr= [];
 
-        $fields = $collectc->toArray();
-
-        foreach ($collectc as $total_comments){
-            Comment::upsert($fields,'id',['user_id']);
+        foreach ($collectcmk as $item) {
+            $userid_arr[$item]['user_id'] = $comments_keys[$item];
         }
 
+    foreach ($userid_arr as $item => $value) {
+      $id = $item + 1; // 1...10000
+       Comment::where('id','=',$id)
+           ->update($userid_arr[$item]);
+        }
    }
 
 

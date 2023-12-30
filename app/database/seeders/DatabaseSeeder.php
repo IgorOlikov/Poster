@@ -12,23 +12,19 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
 
-       User::factory(10)  //users
+       User::factory(100)  //users
             ->has(Post::factory() //posts for 1 user
-                ->has(Comment::factory(10) // comments for 1 post
+                ->has(Comment::factory(100) // comments for 1 post
                     ->state(function (array $attributes, Post $post){
                                  return ['user_id' => $post->id];
                 })))->create();
-
-
+            //after creating?
 
        $this->call([
-            CommentTableSeeder::class, // index 0- 100
+             CommentTableSeeder::class, // index 0- 100
             //ChildrenCommentTableSeeder::class,
        ]);
 
