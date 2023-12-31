@@ -12,37 +12,32 @@ class CommentUserIdFixer extends Seeder
 {
     public function run(): void
     {
-        $user_id = collect(User::all()->modelKeys());
+        $user_id = User::all()->modelKeys();
+        $id = Comment::all()->modelKeys();
 
         $comments_size = Comment::count();
 
         for ($i = 0;$i < $comments_size;$i++) {
-            $user_id = $user_id->concat($user_id);
-            if ($user_id->count() > $comments_size){
+            $user_id = array_merge($user_id,$user_id);
+            if (count($user_id) > $comments_size){
                 break;
             }
         }
-        $user_id = $user_id->take($comments_size);
+        $user_id = array_slice($user_id,0, $comments_size);
 
-        $comment_keys = Comment::all()->keys();
-
-        $user_id_arr = [];
+        $comment_keys = Comment::all()->keys()->toArray();
 
         foreach ($comment_keys as $key) {
-            $user_id_arr[$key]['user_id'] = $user_id[$key];
+            $rows[] = [
+                'id' => $id[$key],
+                'user_id' => $user_id[$key],
+            ];
         }
         unset($user_id);
 
-
-
-        for ($z = 1,$i = 0;$i < $comments_size;$i++,$z++){
-            Comment::where('id','=',$z)
-                ->update(['user_id' => $user_id_arr[$i]['user_id']]);
-            dump("where id =$z ['user_id'] =>" .$user_id_arr[$i]['user_id'] . PHP_EOL);
-            dump(Comment::where('id','=',$z)->first());
+        foreach ($rows as $row){
+            Comment::where('id',$row['id'])
+                ->update(['user_id' => $row['user_id']]);
         }
-        exit();
-        dd(Comment::all()->first());
-
     }
 }
