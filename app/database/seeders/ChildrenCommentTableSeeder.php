@@ -10,28 +10,39 @@ use Illuminate\Database\Seeder;
 
 class ChildrenCommentTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $data = [];
-        $user_id = collect(User::all()->modelKeys());
-        $post_id = collect(Post::all()->modelKeys());
-        $comment = collect(Comment::all());
+        $users = collect(User::all()->modelKeys());
+        $posts = collect(Post::all()->modelKeys());
+        $comment_count = Comment::count();
+        $user_count = User::count();
+        $comments = Comment::all();
 
-        for ($i = 0;$i < 10;$i++) {
-            $data[] = [
 
-                'post_id' => $ppp = $post_id->random(), // [4,6,9]
-                'parent_id' => $comment->where('post_id','=',$ppp)->value('id'),
-                'user_id' => $user_id->random(),
-                'comment' => fake()->text,
-            ];
+        //$comments = $comments->toArray();
+        //dd($comments->first()->id); //2
+        //dd(Comment::where('id','=',1)->value('id')); //1
+        dd($comments[0]); //2
+
+        for ($i = 0;$i < $comment_count;$i++) { //$i total comments 100
+                 //$post_id  = $posts[$i]['id'];
+                  $post_id = $comments[$i]['post_id'];
+                    $parent_id = $comments[0];
+                    dd($comments[0]);
+            for ($z = 0;$z < $user_count;$z++) { // 10 users write 10 comments for 1 existing comment
+                $data[] = [
+                    'post_id' => $post_id, // [4,6,9]
+                    'parent_id' => $parent_id, //where
+                    'user_id' => $users->random(), // ?
+                    'comment' => fake()->text,
+                ];
+                foreach ($data as $parent_comment) {
+                    Comment::insert($parent_comment);
+                }
+            }
+            exit();
         }
 
-        foreach ($data as $comment) {
-            Comment::insert($comment);
-        }
     }
 }

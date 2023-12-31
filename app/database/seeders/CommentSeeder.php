@@ -16,15 +16,7 @@ class CommentSeeder extends Seeder
      */
     public function run(): void
     {
-
         Comment::factory()->count(15)->create();
 
-
-
-
-      // Comment::factory()
-      //    ->for($post)
-      //     ->for($user)
-      //    ->create();
     }
 }

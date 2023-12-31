@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-       User::factory(100)  //users
+       User::factory(10)  //users
             ->has(Post::factory() //posts for 1 user
-                ->has(Comment::factory(100) // comments for 1 post
+                ->has(Comment::factory(10) // comments for 1 post
                     ->state(function (array $attributes, Post $post){
                                  return ['user_id' => $post->id];
                 })))->create();

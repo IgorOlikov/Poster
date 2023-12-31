@@ -12,15 +12,13 @@ class CommentTableSeeder extends Seeder
 {
     public function run(): void
     {
-
-
         $comments_keys = collect(Comment::all()->modelKeys());
 
         $comments_size = Comment::count();
         $users_size = User::count();
 
         $trash = $comments_keys->splice($users_size);
-
+        unset($trash);
         for ($i = 0;$i < $comments_size;$i++) {
             $comments_keys = $comments_keys->concat($comments_keys);
             if ($comments_keys->count() > $comments_size){
@@ -29,23 +27,20 @@ class CommentTableSeeder extends Seeder
         }
         $comments_keys = $comments_keys->take($comments_size);
 
-        //dd($comments_keys);
-
-        $collectc = collect(Comment::all());
-
         $collectcmk = collect(Comment::all())->keys();
 
-        //
-        $userid_arr= [];
+        $user_id_arr = [];
 
         foreach ($collectcmk as $item) {
-            $userid_arr[$item]['user_id'] = $comments_keys[$item];
+            $user_id_arr[$item]['user_id'] = $comments_keys[$item];
+        }
+        unset($comments_keys);
+
+
+        for ($z = 1,$i = 0;$i < $comments_size;$i++,$z++){
+            Comment::where('id','=',$z)
+                ->update($user_id_arr[$i]);
         }
 
-        foreach ($userid_arr as $item => $value) {
-            $id = $item + 1; // 1...10000
-            Comment::where('id','=',$id)
-                ->update($userid_arr[$item]);
-        }
     }
 }
