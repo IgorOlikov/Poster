@@ -11,36 +11,40 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $user_id = User::all()->modelKeys();
-        $id = Comment::all()->modelKeys();
+        $users = collect(User::all()->modelKeys());
+        $posts = collect(Post::all()->modelKeys());
+        $comment_count = Comment::count();
+        $user_count = User::count();
+        $comments = Comment::all()->sortBy('id');
 
-        $comments_size = Comment::count();
+        $comments = $comments->toArray();
 
-        for ($i = 0;$i < $comments_size;$i++) {
-            $user_id = array_merge($user_id,$user_id);
-            if (count($user_id) > $comments_size){
-                break;
+        //dd($comments);//92 => array:10 [▶]
+                        //30 => array:10 [▶]
+                        //31 => array:10 [▶]
+                        //0 => array:10 [▶]
+                        //1 => array:10 [▶]
+
+        foreach ($comments as $comment) {
+            //$post_id  = $posts[$i]['id'];
+            $post_id = $comment['post_id'];
+            $parent_id = $comment['id'];
+            for ($z = 0;$z < $user_count;$z++) { // 10 users write 10 comments for 1 existing comment
+                $data[] = [
+                    'post_id' => $post_id, // [4,6,9]
+                    'parent_id' => $parent_id, //where
+                    'user_id' => $users->random(), // ?
+                    'comment' => fake()->text,
+                ];
+                dd($data);
+               // foreach ($data as $parent_comment) {
+               //     Comment::insert($parent_comment);
+               // }
             }
+            exit();
         }
-        $user_id = array_slice($user_id,0, $comments_size);
+    }
 
-        $comment_keys = Comment::all()->keys()->toArray();
-
-        foreach ($comment_keys as $key) {
-            $rows[] = [
-                'id' => $id[$key],
-                'user_id' => $user_id[$key],
-            ];
-        }
-        unset($user_id);
-
-        foreach ($rows as $row){
-            Comment::where('id',$row['id'])
-                ->update(['user_id' => $row['user_id']]);
-        }
-
-
-   }
     public function create()
     {
         //
