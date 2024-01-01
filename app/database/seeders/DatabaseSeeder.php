@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
        $this->call([
              CommentUserIdFixer::class, // index 0- 100
-            //ChildrenCommentTableSeeder::class,
+            ChildrenCommentTableSeeder::class,
        ]);
 
     }
