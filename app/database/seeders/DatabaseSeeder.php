@@ -24,8 +24,9 @@ class DatabaseSeeder extends Seeder
             //after creating?
 
        $this->call([
-             CommentUserIdFixer::class, // index 0- 100
-            ChildrenCommentTableSeeder::class,
+           CommentUserIdFixer::class, // index 0- 100
+           ChildrenCommentSeeder::class,
+           ParentForParentComments::class,
        ]);
 
     }

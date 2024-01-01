@@ -9,7 +9,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 
-class ChildrenCommentTableSeeder extends Seeder
+class ChildrenCommentSeeder extends Seeder
 {
     public function run(): void
     {
