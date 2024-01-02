@@ -53,4 +53,14 @@ services:
         - "5432:5432"
 
 
+    node:
+      build:
+        context: docker/node
+        dockerfile: Dockerfile
+      volumes:
+        - ./app:/app
+      ports:
+        - "5173:5173"
+
+
 
