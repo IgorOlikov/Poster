@@ -12,9 +12,11 @@ class PostController extends Controller
      */
     public function index()
     {
-       $posts = Post::all()->sortBy('id');
-        //dd($posts);
-       return $posts;
+      // $posts = Post::all()->sortBy('id');
+      //  //dd($posts);
+      // return $posts;
+
+        return view('posts.index');
     }
 
     /**
