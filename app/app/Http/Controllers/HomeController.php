@@ -13,7 +13,10 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+          $posts = Post::inRandomOrder()->take(10)->get();
 
+
+          return view('home',compact('posts'));
     }
 
     public function create()

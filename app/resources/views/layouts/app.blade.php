@@ -19,12 +19,3 @@
             @include('layouts.navigation')
 
             <!-- Page Content -->
-            <main>
-
-
-
-
-            </main>
-        </div>
-    </body>
-</html>

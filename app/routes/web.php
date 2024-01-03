@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -10,9 +11,7 @@ require __DIR__.'/auth.php';
   //      return view('welcome');
   //  });
 
-Route::get('/', function () {
-    return view('home');
-})
+Route::get('/', [HomeController::class,'index'])
     //->middleware(['auth', 'verified'])
     ->name('home');
 
