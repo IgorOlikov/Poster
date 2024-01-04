@@ -22,5 +22,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
-
+Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create');
+Route::get('/posts/{post}',[PostController::class, 'show'])->name('posts.show');
 

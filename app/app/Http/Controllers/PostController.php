@@ -12,7 +12,7 @@ class PostController extends Controller
      */
     public function index()
     {
-       $posts = Post::all()->sortBy('id')->take(10);
+       $posts = Post::all()->sortBy('id')->take(5);
 
 
         return view('posts.index',compact('posts'));
@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -37,9 +37,11 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        //
+        //dd($post);
+
+        return view('posts.show',compact('post'));
     }
 
     /**
