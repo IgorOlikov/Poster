@@ -4,7 +4,7 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
         <a href="{{ route('posts.create') }}">
-        <button class="bg-red-800" type="button">
+            <button class="focus:outline-none text-white bg-red-800 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
             Create Post
         </button>
         </a>
