@@ -17,8 +17,9 @@
     <body class="min-h-screen">
             @include('layouts.navigation')
 
-
-
+            @if(\Illuminate\Support\Facades\Route::is('profile.edit'))
+            {{ $slot }}
+            @endif
 
 
             <!-- Page Content -->
