@@ -26,10 +26,10 @@ class Post extends Model
         return $this->hasMany(Comment::class,'post_id','id'); // with children comments
     }
 
-    public function children_comments(): HasMany
-    {
-        return $this->hasMany(Comment::class,'post_id','id')->with('comments'); // with children comments
-    }
+    //public function children_comments(): HasMany
+    //{
+    //    return $this->hasMany(Comment::class,'post_id','id')->with('comments'); // with children comments
+    //}
 
 
 

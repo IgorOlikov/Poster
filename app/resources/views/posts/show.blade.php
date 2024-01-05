@@ -27,12 +27,12 @@
     </div>
     <ul>
         @foreach($comments as $comment)
-            <li>id - {{ $comment->id }}, comment - {{ $comment->comment }}</li>
-            @if (isset($comment->children_comments))
-                @foreach($comment->children_comments as $children )
-                    <li>parent id - {{ $children->parent_id }},id - {{ $children->id }} ,comment - {{ $children->comment }}</li>
+            <li>---Base comment! - id - {{ $comment->id }}, comment - {{ $comment->comment }}</li>
+
+                @foreach($comment->child_comments as $child_comment)
+                    @include('comments.child_comments',['child_comment' => $child_comment])
                 @endforeach
-            @endif
+
         @endforeach
     </ul>
 
