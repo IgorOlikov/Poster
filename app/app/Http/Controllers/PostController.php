@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
@@ -36,7 +38,33 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('posts.show',compact('post'));
+       // dd($post);
+
+        //$comments = $post->with('childrenComments')->first();
+       // $comments = $post->load('childrenComments')->whereNull('parent_id');
+            //->where('parent_id',null);
+
+         //$comments  = $post->load('comments')->whereNull('parent_id');
+      // $comments = $post->load(
+      //     ['comments' => function( $query){
+      //     $query->whereNull('parent_id');
+      // }]);
+
+        $comments = $post->load(
+            ['childrenComments' => function($query){
+                $query->whereNull('parent_id');
+            }]);
+
+
+        $comments = $comments['childrenComments'];
+      // $comments  = $post->load('comments')->getQuery()->get();
+
+       //dd($comments);
+       // dd(...$comments['childrenComments']);
+       // dd(...$comments['childrenComments']);
+
+
+        return view('posts.show',compact('post','comments'));
     }
 
     public function edit(Post $post)

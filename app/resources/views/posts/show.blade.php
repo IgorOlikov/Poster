@@ -2,10 +2,8 @@
 
 
 
-
-
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
-    @if(\Illuminate\Support\Facades\Auth::user()->id === $post->user_id)
+@if((\Illuminate\Support\Facades\Auth::check()) && (\Illuminate\Support\Facades\Auth::user()->id === $post->user_id))
         <a href="{{ route('posts.edit',$post) }}">
         <button>Update Post</button>
         </a>
@@ -27,6 +25,17 @@
 
         </div>
     </div>
+    <ul>
+        @foreach($comments as $comment)
+            <li>PARENT COMMENT - {{ $comment->comment }}</li>
+            @if (isset($comment->children_comments))
+                @foreach($comment->children_comments as $children )
+                    <li>CHILDREN COMMENT{{ $children->comment }}</li>
+                @endforeach
+            @endif
+        @endforeach
+    </ul>
+
 </div>
 
 
