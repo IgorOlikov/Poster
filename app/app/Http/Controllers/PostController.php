@@ -51,17 +51,18 @@ class PostController extends Controller
       // }]);
 
         $comments = $post->load(
-            ['childrenComments' => function($query){
+            ['comments' => function($query){
                 $query->whereNull('parent_id');
             }]);
 
+           $comments = $comments['comments'];
 
-        $comments = $comments['childrenComments'];
-      // $comments  = $post->load('comments')->getQuery()->get();
+           //base comments(without parent_id) -> load recursive relationships
+          $comments = $comments->load('children_comments');
 
-       //dd($comments);
-       // dd(...$comments['childrenComments']);
-       // dd(...$comments['childrenComments']);
+          //dd($comments);
+        //dd($comments[0]['children_comments'][0]['children_comments'][0]['children_comments'][0]);
+
 
 
         return view('posts.show',compact('post','comments'));

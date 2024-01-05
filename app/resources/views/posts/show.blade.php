@@ -27,10 +27,10 @@
     </div>
     <ul>
         @foreach($comments as $comment)
-            <li>PARENT COMMENT - {{ $comment->comment }}</li>
+            <li>id - {{ $comment->id }}, comment - {{ $comment->comment }}</li>
             @if (isset($comment->children_comments))
                 @foreach($comment->children_comments as $children )
-                    <li>CHILDREN COMMENT{{ $children->comment }}</li>
+                    <li>parent id - {{ $children->parent_id }},id - {{ $children->id }} ,comment - {{ $children->comment }}</li>
                 @endforeach
             @endif
         @endforeach
