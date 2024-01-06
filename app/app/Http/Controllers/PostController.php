@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostController extends Controller
@@ -19,6 +20,10 @@ class PostController extends Controller
 
     public function create()
     {
+        if (!Auth::check()){
+            return redirect('/login');
+        }
+
         return view('posts.create');
     }
 
