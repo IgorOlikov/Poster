@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 
@@ -28,3 +29,12 @@ Route::post('/posts',[PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}/edit',[PostController::class, 'edit'])->name('posts.edit');
 Route::put('/posts/{post}',[PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}',[PostController::class, 'destroy'])->name('posts.destroy');
+
+Route::get('/comments',[CommentController::class, 'index'])->name('comments.index');
+Route::get('/comments/create',[CommentController::class, 'create'])->name('comments.create');
+Route::get('/comments/{comment}',[CommentController::class, 'show'])->name('comments.show');
+Route::post('/comments',[CommentController::class, 'store'])->name('comments.store');
+Route::get('/comments/{comment}/edit',[CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/{comment}',[CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{comment}',[CommentController::class, 'destroy'])->name('comments.destroy');
+
