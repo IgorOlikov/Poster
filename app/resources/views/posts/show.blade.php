@@ -18,6 +18,9 @@
     <div class="hover:bg-gray-900 hover:text-white transition duration-300 max-w-sm rounded overflow-hidden shadow-lg">
         <div class="py-4 px-8">
             <img src="https://tailwindcss.com/img/jonathan.jpg" class="rounded-full h-12 w-12 mb-4">
+            <a href="/users/{{ $owner->name }}">
+                <h4 class="text-lg mb-3 font-semibold">Author {{ $owner->name }}</h4>
+            </a>
             <a href="/posts/{{ $post->id }}">
                 <h4 class="text-lg mb-3 font-semibold">{{ $post->title }}</h4>
             </a>
@@ -25,18 +28,22 @@
 
         </div>
     </div>
-    <ul>
-        @foreach($comments as $comment)
-            <li>---Base comment! - id - {{ $comment->id }}, comment - {{ $comment->comment }}</li>
 
-                @foreach($comment->child_comments as $child_comment)
-                    @include('comments.child_comments',['child_comment' => $child_comment])
-                @endforeach
+    <div class="antialiased  max-w-screen-sm">
+        <h3 class="text-lg font-semibold text-gray-900">Comments</h3>
 
-        @endforeach
-    </ul>
+        <div class="space-y-4">
 
-</div>
+
+
+
+        </div>
+    </div>
+      <a href="{{ route('posts.comments.create',$post) }}">Create Comment</a>
+
+    @include('comments.parent_comments')
+
+    </div>
 
 
     </div>

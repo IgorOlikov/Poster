@@ -51,12 +51,16 @@ class PostController extends Controller
            $comments = $comments['comments'];
 
            //base comments(without parent_id) -> load recursive relationships
-          $comments = $comments->load('child_comments');
+          $comments = $comments->load('comment_owner','child_comments.comment_owner','parent_comment.comment_owner');
 
-          //dd($comments);
-        //dd($comments[0]['children_comments'][0]['children_comments'][0]['children_comments'][0]);
 
-        return view('posts.show',compact('post','comments'));
+
+         $owner = $post->load('owner');
+
+          $owner = $owner['owner'];
+
+
+        return view('posts.show',compact('post','comments','owner'));
     }
 
     public function edit(Post $post)

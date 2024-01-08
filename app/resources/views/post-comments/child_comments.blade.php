@@ -7,16 +7,10 @@
         <a href="/users/{{$child_comment->parent_comment->id}}"><strong><p class="text-sm">Replied {{ $child_comment->parent_comment->comment_owner->name }}</p></strong></a>
 
         <p class="text-sm">{{ $child_comment->comment }}</p>
+        <a>Comment</a>
 
-        <a href="{{ route('posts.comments.children.create',[$post,$child_comment]) }}">Comment</a>
-
-        <a href="{{ route('posts.comments.edit',[$post,$child_comment]) }}">Edit</a>
-
-        <form method="post" action="{{ route('comments.destroy',$comment) }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit">Delete</button>
-        </form>
+        <a>Edit</a>
+        <a>Delete</a>
 
     </div>
 </div>

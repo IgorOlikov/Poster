@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
@@ -29,6 +30,15 @@ Route::post('/posts',[PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}/edit',[PostController::class, 'edit'])->name('posts.edit');
 Route::put('/posts/{post}',[PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{post}',[PostController::class, 'destroy'])->name('posts.destroy');
+
+
+
+Route::get('/posts/{post}/comments',[PostCommentController::class, 'index'])->name('posts.comments.index');
+Route::get('/posts/{post}/comments/create',[PostCommentController::class, 'create'])->name('posts.comments.create');
+Route::get('/posts/{post}/comments/{comment}/create',[PostCommentController::class, 'create_children'])->name('posts.comments.children.create');
+Route::get('/posts/{post}/comments/{comment}/edit',[PostCommentController::class, 'edit'])->name('posts.comments.edit');
+
+
 
 Route::get('/comments',[CommentController::class, 'index'])->name('comments.index');
 Route::get('/comments/create',[CommentController::class, 'create'])->name('comments.create');
