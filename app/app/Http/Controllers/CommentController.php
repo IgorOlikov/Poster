@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -19,9 +20,22 @@ class CommentController extends Controller
         return view('comments.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request,Post $post)
     {
-        dd($request);
+        $attributes = $request->validate([
+           'parent_id' => ['nullable','int','exists:comments,id'],
+            'post_id' => ['required','int','exists:posts,id'],
+            'user_id' => ['required', 'int', 'exists:users,id'],
+            'comment' => ['required','string','max:255']
+        ]);
+
+
+
+        Comment::create($attributes);
+
+
+
+        return redirect("/posts/$post->id");
     }
 
     public function show(Comment $comment)

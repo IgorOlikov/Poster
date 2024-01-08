@@ -1,5 +1,5 @@
 
-<form method="post" action="{{ route('comments.store') }}">
+<form method="post" action="{{ route('comments.store',$post) }}">
     @csrf
     <label></label>
     <input type="number" hidden="" name="parent_id">
