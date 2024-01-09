@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class PostCommentController extends Controller
 {
@@ -15,13 +16,21 @@ class PostCommentController extends Controller
 
     public function create(Post $post)
     {
+        if (!Auth::check())
+        {
+            return redirect('/login');
+        }
+
         return view('post-comments.create_post_comment',compact('post'));
 
     }
 
     public function create_children(Post $post, Comment $comment)
     {
-        //dd($post,$comment);
+        if (!Auth::check())
+        {
+            return redirect('/login');
+        }
 
         return view('post-comments.create_children_comment',compact('post','comment'));
     }

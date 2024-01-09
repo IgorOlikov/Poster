@@ -15,7 +15,6 @@ class HomeController extends Controller
     {
           $posts = Post::all()->sortBy('id')->take(5);
 
-
           return view('home',compact('posts'));
     }
 

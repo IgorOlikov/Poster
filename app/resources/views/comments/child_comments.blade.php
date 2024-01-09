@@ -10,6 +10,8 @@
 
         <a href="{{ route('posts.comments.children.create',[$post,$child_comment]) }}">Comment</a>
 
+        @auth()
+            @if((Auth::user()->id === $comment->user_id) || (Auth::user()->is_admin))
         <a href="{{ route('posts.comments.edit',[$post,$child_comment]) }}">Edit</a>
 
         <form method="post" action="{{ route('comments.destroy',$child_comment) }}">
@@ -17,6 +19,8 @@
             @method('DELETE')
             <button type="submit">Delete</button>
         </form>
+            @endif
+        @endauth
 
     </div>
 </div>
