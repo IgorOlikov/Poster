@@ -15,7 +15,7 @@
     @endif
 
 
-    <div class="hover:bg-gray-900 hover:text-white transition duration-300 max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="transition duration-300 max-w-sm rounded overflow-hidden shadow-lg">
         <div class="py-4 px-8">
             <img src="https://tailwindcss.com/img/jonathan.jpg" class="rounded-full h-12 w-12 mb-4">
             <a href="/users/{{ $post->owner->name }}">
@@ -29,10 +29,10 @@
         </div>
     </div>
 
-    <div class="antialiased  max-w-screen-sm">
+    <div class="antialiased  max-w-screen-sm mt-20">
         <h3 class="text-lg font-semibold text-gray-900">Comments</h3>
 
-        <div class="space-y-4">
+        <div class="space-y-4 mt-10">
 
 
 
