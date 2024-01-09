@@ -4,7 +4,7 @@
     </div>
     <div class="flex-1 border ml-5 rounded-lg px-2 py-4 sm:px-6 sm:py-4 leading-relaxed">
         <strong>{{ $child_comment->comment_owner->name }}</strong> <span class="text-xs text-gray-400">{{ $child_comment->created_at }}</span>
-        <a href="/users/{{$child_comment->parent_comment->id}}"><strong><p class="text-sm">Replied {{ $child_comment->parent_comment->comment_owner->name }}</p></strong></a>
+        <a href="/users/{{$child_comment->parent_comment->id}}"><strong><p class="text-sm">Replied {{ $child_comment->parent_comment->comment_owner->name }} {{ $child_comment->parent_comment->comment }}</p></strong></a>
 
         <p class="text-sm">{{ $child_comment->comment }}</p>
 
@@ -12,7 +12,7 @@
 
         <a href="{{ route('posts.comments.edit',[$post,$child_comment]) }}">Edit</a>
 
-        <form method="post" action="{{ route('comments.destroy',$comment) }}">
+        <form method="post" action="{{ route('comments.destroy',$child_comment) }}">
             @csrf
             @method('DELETE')
             <button type="submit">Delete</button>

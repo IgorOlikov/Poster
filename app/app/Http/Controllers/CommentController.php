@@ -28,12 +28,7 @@ class CommentController extends Controller
             'user_id' => ['required', 'int', 'exists:users,id'],
             'comment' => ['required','string','max:255']
         ]);
-
-
-
         Comment::create($attributes);
-
-
 
         return redirect("/posts/$post->id");
     }
@@ -48,13 +43,22 @@ class CommentController extends Controller
         return view('comments.edit',compact('comment'));
     }
 
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request,Comment $comment)
     {
-        dd($request);
+        $attributes = $request->validate([
+           'comment' => ['required','string','max:255'],
+        ]);
+        $comment->update($attributes);
+
+        return redirect("posts/$comment->post_id");
     }
 
     public function destroy(Comment $comment)
     {
-        dd($comment);
+       // $comment->child_comments()->delete();
+
+        $comment->delete();
+
+        return redirect("posts/$comment->post_id");
     }
 }

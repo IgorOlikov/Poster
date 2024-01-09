@@ -23,10 +23,8 @@ class PostController extends Controller
         if (!Auth::check()){
             return redirect('/login');
         }
-
         return view('posts.create');
     }
-
     public function store(Request $request)
     {
         $attributes = $request->validate([
@@ -47,20 +45,14 @@ class PostController extends Controller
             ['comments' => function($query){
                 $query->whereNull('parent_id');
             }]);
-
            $comments = $comments['comments'];
 
            //base comments(without parent_id) -> load recursive relationships
           $comments = $comments->load('comment_owner','child_comments.comment_owner','parent_comment.comment_owner');
 
+          $post->load('owner');
 
-
-         $owner = $post->load('owner');
-
-          $owner = $owner['owner'];
-
-
-        return view('posts.show',compact('post','comments','owner'));
+        return view('posts.show',compact('post','comments'));
     }
 
     public function edit(Post $post)
