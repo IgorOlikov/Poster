@@ -12,6 +12,9 @@
                     <div class="transition duration-300 max-w-sm rounded overflow-hidden shadow-lg">
                         <div class="py-4 px-8">
                             <img src="https://tailwindcss.com/img/jonathan.jpg" class="rounded-full h-12 w-12 mb-4">
+                            <a href="/users/{{ $post->owner->id }}">
+                                <h4 class="text-lg mb-3 font-semibold">Author {{ $post->owner->name }}</h4>
+                            </a>
                             <a href="/posts/{{ $post->id }}">
                                 <h4 class="text-lg mb-3 font-semibold">{{ $post->title }}</h4>
                             </a>

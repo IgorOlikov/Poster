@@ -5,6 +5,7 @@ use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
 
@@ -22,6 +23,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::get('/users/{user}',[UserController::class,'show'])->name('user.show');
+
+
+
 
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
 Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create');
