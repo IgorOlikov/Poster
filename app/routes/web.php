@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/users/{user}',[UserController::class,'show'])->name('user.show');
+Route::get('/users/{user}/create-image',[UserController::class,'createImage'])->name('create-image.profile.image');
+Route::post('/users/{user}/upload',[UserController::class,'uploadProfileImage'])->name('upload.profile.image');
 
 
 

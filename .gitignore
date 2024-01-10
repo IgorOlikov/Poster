@@ -1,3 +1,5 @@
 /docker/postgresql
 .idea
-.git
+/vendor
+/git
+/app/public/images
