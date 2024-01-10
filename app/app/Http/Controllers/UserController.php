@@ -48,14 +48,14 @@ class UserController extends Controller
 
 
         $image = $request->validate([
-           'image' => ['required','image:jpg,jpeg,png'],
+            'image' => ['required','image:jpg,jpeg,png'],
         ]);
 
-       // dd($image);
-        $path = $request->file('image')->store();
+        // dd($image);
+        $path = $request->file('image')->store('images'); // http://localhost/storage/images/5D1HZLLRH9hhqQx8v114r0YREMyQHHhBEj6ExV8U.png
 
-      dd($path);
-       // Storage::put('image');
+        dd($path);
+        // Storage::put('image');
 
         exit();
         if ($request->hasFile('image')){
