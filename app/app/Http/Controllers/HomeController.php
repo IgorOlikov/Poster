@@ -13,7 +13,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-          $posts = Post::all()->sortBy('id')->take(5);
+          $posts = Post::all()->sortBy('id')->take(6);
 
           return view('home',compact('posts'));
     }

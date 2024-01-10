@@ -1,3 +1,4 @@
+@include('layouts.app')
 
 <form method="post" action="{{ route('comments.store',$post) }}">
     @csrf

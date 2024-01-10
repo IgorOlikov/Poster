@@ -1,4 +1,4 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@include('layouts.app')
 
 <form enctype="multipart/form-data" class="max-w-sm mx-auto mt-20" method="post" action="{{ route('upload.profile.image',$user) }}">
     @csrf

@@ -1,6 +1,8 @@
 <div class="flex">
     <div class="flex-shrink-0 mr-3">
+        <a href="{{ route('user.show',$child_comment->comment_owner)}}">
         <img class="mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10" src="{{$child_comment->comment_owner->avatar}}">
+        </a>
     </div>
     <div class="flex-1 border ml-5 rounded-lg px-2 py-4 sm:px-6 sm:py-4 leading-relaxed">
         <a href="{{ route('user.show',$child_comment->comment_owner->id) }}" ><strong>{{ $child_comment->comment_owner->name }}</strong></a> <span class="text-xs text-gray-400">{{ $child_comment->created_at }}</span>

@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-       $posts = Post::all()->sortBy('id', SORT_NATURAL ,true)->take(5);
+       $posts = Post::all()->sortBy('id', SORT_NATURAL ,true)->take(6);
 
         return view('posts.index',compact('posts'));
     }
