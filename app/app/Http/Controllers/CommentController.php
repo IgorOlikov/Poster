@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -21,11 +22,14 @@ class CommentController extends Controller
         return view('comments.create');
     }
 
-    public function store(StoreCommentRequest $request,Post $post)
+    public function store(StoreCommentRequest $request,Post $post,Comment $comment)
     {
+        dd($comment);
         //dd($request);
         $attributes = $request->validated();
-        Comment::create($attributes);
+        $comment = ['comment'=> $attributes['comment'],'post_id' =>$post->id,'user_id' => Auth::user()->id];
+        dd($comment);
+        Comment::create([$attributes]);
 
         return redirect("/posts/$post->id");
     }
@@ -52,8 +56,6 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment)
     {
-       // $comment->child_comments()->delete();
-
         $comment->delete();
 
         return redirect("posts/$comment->post_id");

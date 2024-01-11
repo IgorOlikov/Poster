@@ -2,26 +2,17 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Comment;
-use App\Models\Post;
+
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreCommentRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        if (!($this->user()->id) === ((int)$this->user_id)) {
-            return false;
-        }
-        if (!($this->post->id === (int)$this->post_id)) {
-            return false;
-        }
-        if (!is_null($this->parent_id)) {
-               $parentPostId = Comment::where('id','=',(int)$this->parent_id)->value('post_id');
-               if (!($parentPostId === (int)$this->post->id)){
-                   return false;
-               }
-        }
+       if (!Auth::check()){
+           return false;
+       }
         return true;
     }
 
@@ -34,8 +25,8 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             'parent_id' => ['nullable','int','exists:comments,id'],
-            'post_id' => ['required','int','exists:posts,id'],
-            'user_id' => ['required', 'int', 'exists:users,id'],
+            //'post_id' => ['required','int','exists:posts,id'],
+            //'user_id' => ['required', 'int', 'exists:users,id'],
             'comment' => ['required','string','max:255']
         ];
     }

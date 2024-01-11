@@ -46,7 +46,7 @@ Route::get('/posts/{post}/comments',[PostCommentController::class, 'index'])->na
 Route::get('/posts/{post}/comments/create',[PostCommentController::class, 'create'])->name('posts.comments.create');
 Route::get('/posts/{post}/comments/{comment}/create',[PostCommentController::class, 'create_children'])->name('posts.comments.children.create');
 Route::get('/posts/{post}/comments/{comment}/edit',[PostCommentController::class, 'edit'])->name('posts.comments.edit');
-
+Route::post('/posts/{post}/comments/{comment}/store',[PostCommentController::class, 'store'])->name('posts.comments.children.store');
 
 
 Route::get('/comments',[CommentController::class, 'index'])->name('comments.index');

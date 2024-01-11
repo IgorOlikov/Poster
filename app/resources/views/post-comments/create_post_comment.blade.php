@@ -5,12 +5,6 @@
 
 <form class="max-w-sm mx-auto mt-20" method="post" action="{{ route('comments.store',$post) }}">
 @csrf
-<label></label>
-<input type="number" hidden="" name="parent_id">
-<label></label>
-<input type="number" hidden="" value="{{ $post->id }}" name="post_id">
-<label></label>
-<input type="number" hidden="" value="{{ Auth::user()->id }}" name="user_id">
 
     <div class="mb-5">
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900 ">Write comment!</label>
