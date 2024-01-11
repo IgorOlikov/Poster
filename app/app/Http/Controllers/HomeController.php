@@ -12,7 +12,8 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-          $posts = Post::all()->sortBy('id')->take(6);
+          $posts = Post::cursorPaginate(6);
+          //dd($posts);
 
           return view('home',compact('posts'));
     }

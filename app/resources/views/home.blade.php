@@ -1,7 +1,7 @@
 <x-app-layout>
 
 </x-app-layout>
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
     @if(\Illuminate\Support\Facades\Route::is('home'))
         <!-- <div class="min-h-screen max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> -->
 
