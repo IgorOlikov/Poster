@@ -8,9 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCommentRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         if (!($this->user()->id) === ((int)$this->user_id)) {
@@ -20,8 +17,8 @@ class StoreCommentRequest extends FormRequest
             return false;
         }
         if (!is_null($this->parent_id)) {
-               $commentPostId = Comment::where('id','=',(int)$this->parent_id)->value('post_id');
-               if (!$commentPostId === (int)$this->post->id){
+               $parentPostId = Comment::where('id','=',(int)$this->parent_id)->value('post_id');
+               if (!($parentPostId === (int)$this->post->id)){
                    return false;
                }
         }

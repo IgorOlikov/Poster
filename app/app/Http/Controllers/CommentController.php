@@ -23,6 +23,7 @@ class CommentController extends Controller
 
     public function store(StoreCommentRequest $request,Post $post)
     {
+        //dd($request);
         $attributes = $request->validated();
         Comment::create($attributes);
 
