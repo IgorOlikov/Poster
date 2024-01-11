@@ -22,16 +22,15 @@ class CommentController extends Controller
         return view('comments.create');
     }
 
-    public function store(StoreCommentRequest $request,Post $post,Comment $comment)
+    public function store(StoreCommentRequest $request, Post $post)
     {
-        dd($comment);
-        //dd($request);
-        $attributes = $request->validated();
-        $comment = ['comment'=> $attributes['comment'],'post_id' =>$post->id,'user_id' => Auth::user()->id];
-        dd($comment);
-        Comment::create([$attributes]);
+        $post->comments()->create([
+          'comment' => $request->validated('comment'),
+           'post_id' => $post->id,
+           'user_id' => $request->user()->id,
+        ]);
 
-        return redirect("/posts/$post->id");
+        return redirect()->route('posts.show',$post->id);
     }
 
     public function show(Comment $comment)

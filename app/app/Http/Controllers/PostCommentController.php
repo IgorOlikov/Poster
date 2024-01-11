@@ -23,7 +23,6 @@ class PostCommentController extends Controller
         }
 
         return view('post-comments.create_post_comment',compact('post'));
-
     }
 
     public function create_children(Post $post, Comment $comment)
@@ -32,7 +31,6 @@ class PostCommentController extends Controller
         {
             return redirect('/login');
         }
-
         return view('post-comments.create_children_comment',compact('post','comment'));
     }
 
