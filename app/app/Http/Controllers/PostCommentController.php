@@ -36,14 +36,15 @@ class PostCommentController extends Controller
         return view('post-comments.create_children_comment',compact('post','comment'));
     }
 
-    public function store(StoreCommentRequest $request,Post $post,Comment $comment)
+    public function store(StoreCommentRequest $request, Post $post, Comment $comment)
     {
-        $attributes = $request->validated();
+        $comment->child_comments()->create([
+           'comment' =>  $request->validated('comment'),
+            'post_id' => $comment->post_id,
+            'user_id' => $request->user()->id,
+        ]);
 
-        $childrenComment = ['comment'=> $attributes['comment'],'post_id' =>$post->id,'user_id' => Auth::user()->id,'parent_id' => $comment->id];
-        Comment::create($childrenComment);
-
-        return redirect("/posts/$post->id");
+        return redirect()->route('posts.show',$post->id);
     }
 
     public function show(string $id)
