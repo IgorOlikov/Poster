@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostUpdateRequest;
 use App\Http\Requests\StorePostRequest;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class PostController extends Controller
 {
     public function index()
     {
-       $posts = Post::all()->sortBy('id', SORT_NATURAL ,true)->take(6);
+       $posts = Post::orderBy('id','desc')->paginate(6);
 
         return view('posts.index',compact('posts'));
     }
@@ -35,21 +39,16 @@ class PostController extends Controller
 
        $post = Post::create($attributes);
 
-        return redirect("/posts/$post->id");
+        return redirect()->route('posts.show',$post->id);
     }
 
     public function show(Post $post)
     {
-        $comments = $post->load(
-            ['comments' => function($query){
-                $query->whereNull('parent_id');
-            }]);
-           $comments = $comments['comments'];
-
-           //base comments(without parent_id) -> load recursive relationships
-          $comments = $comments->load('comment_owner','child_comments.comment_owner','parent_comment.comment_owner');
-
           $post->load('owner');
+
+            $comments = Comment::where('post_id',$post->id)
+               ->with(['comment_owner','child_comments.comment_owner','parent_comment.comment_owner'])
+               ->whereNull('parent_id')->paginate(2);
 
         return view('posts.show',compact('post','comments'));
     }
@@ -59,24 +58,19 @@ class PostController extends Controller
         return view('posts.edit',compact('post'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        $attributes = $request->validate([
-            'title' => ['required'],
-            'body' => ['required'],
-            'image' => ['nullable'],
-        ]);
-        $attributes = array_merge($attributes,['user_id' => $post->user_id]);
+        $postFields = $request->validated();
 
-        $post->update($attributes);
+        $post->update($postFields);
 
-        return redirect("/posts/$post->id");
+        return redirect()->route('posts.show',$post);
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
 
-        return redirect('/posts');
+        return redirect()->route('posts');
     }
 }

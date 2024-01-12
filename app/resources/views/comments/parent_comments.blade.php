@@ -31,4 +31,5 @@
 @endforeach
 
 @endforeach
+{{$comments->links()}}
 
