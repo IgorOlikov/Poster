@@ -1,6 +1,6 @@
 @include('layouts.app')
 
-<form enctype="multipart/form-data" class="max-w-sm mx-auto mt-20" method="post" action="{{ route('upload.profile.image',$user) }}">
+<form enctype="multipart/form-data" class="max-w-sm mx-auto mt-20" method="post" action="{{ route('upload.profile.image') }}">
     @csrf
     @method('POST')
     <div class="form-group">

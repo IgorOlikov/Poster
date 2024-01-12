@@ -6,6 +6,7 @@ use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UploadUserAvatar;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 require __DIR__.'/auth.php';
@@ -27,8 +28,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/users/{user}',[UserController::class,'show'])->name('user.show');
-Route::get('/users/{user}/create-image',[UserController::class,'createImage'])->name('create-image.profile.image');
-Route::post('/users/{user}/upload',[UserController::class,'uploadProfileImage'])->name('upload.profile.image');
+Route::get('/avatar/create',[UserController::class,'createImage'])->name('create-image.profile.image');
+Route::post('/avatar/upload',UploadUserAvatar::class)->name('upload.profile.image');
 
 
 

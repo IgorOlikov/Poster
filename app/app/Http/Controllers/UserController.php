@@ -45,35 +45,8 @@ class UserController extends Controller
         //
     }
 
-    public function uploadProfileImage(Request $request,User $user)
+    public function createImage()
     {
-        ////!!!! validated
-
-        if ($request->hasFile('image')){
-            $oldAvatar= $request->user()->avatar;
-
-            if(!is_null($oldAvatar)){
-                if (\env('DEFAULT_AVATAR') === $oldAvatar){
-                    goto saveFile;
-                }
-                $oldToDelete = explode('http://localhost/storage/images/profile/',$oldAvatar);
-                $oldToDelete = $oldToDelete[1];
-                Storage::disk('public')->delete("images/profile/$oldToDelete");
-                }
-                    saveFile:
-                     $localImagePath = $request->file('image')->store('images/profile');
-                     $publicPathToImage =  \env('APP_URL')."/storage/".$localImagePath;
-                     $newImagePath = ['avatar' => (string)$publicPathToImage];
-                     $user = $request->user()->forceFill($newImagePath);
-                     $user->save();
-                     return redirect("/users/$user->id");
-        }else{
-            return response('the image was not loaded',403);
-        }
-    }
-
-    public function createImage(User $user)
-    {
-        return view('users.create-user-image',compact('user'));
+        return view('users.create-user-image');
     }
 }
