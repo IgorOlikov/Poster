@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
@@ -57,3 +58,7 @@ Route::get('/comments/{comment}/edit',[CommentController::class, 'edit'])->name(
 Route::put('/comments/{comment}',[CommentController::class, 'update'])->name('comments.update');
 Route::delete('/comments/{comment}',[CommentController::class, 'destroy'])->name('comments.destroy');
 
+Route::prefix('/admin')->middleware(['auth','admin'])->group(function (){
+    Route::get('/', [AdminController::class,'index'])->name('admin.index');
+
+});
