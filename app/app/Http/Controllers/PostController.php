@@ -74,6 +74,8 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        (New UploadPostImageService())->deletePostImage($post->image); //-> del in model
+
         $post->delete();
 
         return redirect()->route('posts');
