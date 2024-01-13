@@ -32,11 +32,13 @@ class UploadPostImageService
             return $imagePath;
     }
 
-    public function deletePostImage(string $oldImage) :void
+    public function deletePostImage(?string $oldImage) :void
     {
-        $oldImage = explode('http://localhost/storage/images/posts/',$oldImage);
-        $oldImage = $oldImage[1];
-        Storage::disk('public')->delete("images/posts/$oldImage");
+        if (!is_null($oldImage)){
+            $oldImage = explode('http://localhost/storage/images/posts/', $oldImage);
+            $oldImage = $oldImage[1];
+            Storage::disk('public')->delete("images/posts/$oldImage");
+        }
     }
 
 
