@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->nullable();  // string(slug)->after''title
             $table->text('body');
-            $table->string('post_image')->nullable();
+            $table->string('image')->nullable();
             $table->integer('like',false,true)->default(0);
             $table->integer('dislike',false,true)->default(0);
             $table->integer('total_comments',false,true)->default(0);

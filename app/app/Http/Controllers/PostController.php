@@ -27,8 +27,6 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
-
-
         $user = $request->user();
 
         return view('posts.create',compact('user'));
@@ -38,7 +36,7 @@ class PostController extends Controller
         $imagePath = (New UploadPostImageService())->storePostImage($request->validated('image'));
 
         $post = Post::create([
-            'post_image' => $imagePath,
+            'image' => $imagePath,
             'user_id' => $request->user()->id,
            'title' => $request->validated('title'),
            'body' => $request->validated('body'),
@@ -65,7 +63,9 @@ class PostController extends Controller
 
     public function update(PostUpdateRequest $request, Post $post)
     {
-        $postFields = $request->validated();
+        $fields = $request->validated();
+
+        $postFields['image'] = (New UploadPostImageService())->updatePostImage($fields['image'],$post);
 
         $post->update($postFields);
 

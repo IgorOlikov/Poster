@@ -23,7 +23,7 @@
             <a href="{{ route('user.show',$post->owner) }}">
                 <h4 class="text-lg mb-3 font-semibold">Author {{ $post->owner->name }}</h4>
             </a>
-            <img src="{{$post->post_image}}" class="">
+            <img src="{{$post->image}}" class="">
             <h4 class="text-lg mb-3 font-semibold">{{ $post->title }}</h4>
 
             <p class="mb-2 text-sm text-gray-600">{{ $post->body }}</p>

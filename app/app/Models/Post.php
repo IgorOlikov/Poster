@@ -13,7 +13,7 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $fillable = ['post_image','title','slug','body','user_id'];
+    protected $fillable = ['image','title','slug','body','user_id'];
 
 
     public function owner(): BelongsTo

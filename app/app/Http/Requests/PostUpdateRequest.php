@@ -29,7 +29,7 @@ class PostUpdateRequest extends FormRequest
         return [
             'title' => ['required'],
             'body' => ['required'],
-            'image' => ['nullable'],
+            'image' => ['nullable','image'],
         ];
     }
 }
