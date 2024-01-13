@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use App\Services\UploadPostImageService;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,18 +27,22 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
-        if (!Auth::check()){
-            return redirect('/login');
-        }
+
+
         $user = $request->user();
 
         return view('posts.create',compact('user'));
     }
     public function store(StorePostRequest $request)
     {
-        $attributes = $request->validated();
+        $imagePath = (New UploadPostImageService())->storePostImage($request->validated('image'));
 
-       $post = Post::create($attributes);
+        $post = Post::create([
+            'post_image' => $imagePath,
+            'user_id' => $request->user()->id,
+           'title' => $request->validated('title'),
+           'body' => $request->validated('body'),
+        ]);
 
         return redirect()->route('posts.show',$post->id);
     }

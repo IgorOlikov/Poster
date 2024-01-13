@@ -15,7 +15,7 @@
     @endif
 
 
-    <div class="transition duration-300 max-w-sm rounded overflow-hidden shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition duration-300  rounded overflow-hidden shadow-lg">
         <div class="py-4 px-8">
             <a href="{{ route('user.show',$post->owner) }}">
             <img src="{{$post->owner->avatar}}" class="rounded-full h-12 w-12 mb-4">
@@ -23,7 +23,7 @@
             <a href="{{ route('user.show',$post->owner) }}">
                 <h4 class="text-lg mb-3 font-semibold">Author {{ $post->owner->name }}</h4>
             </a>
-
+            <img src="{{$post->post_image}}" class="">
             <h4 class="text-lg mb-3 font-semibold">{{ $post->title }}</h4>
 
             <p class="mb-2 text-sm text-gray-600">{{ $post->body }}</p>

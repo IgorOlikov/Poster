@@ -9,10 +9,8 @@ class StorePostRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        if (($this->user()->id) === ((integer)$this->user_id)){
-            return true;
-        }
-        return false;
+        //dd($this);
+        return true;
     }
     /**
      * Get the validation rules that apply to the request.
@@ -24,8 +22,8 @@ class StorePostRequest extends FormRequest
         return [
             'title' => ['required','string','unique:posts,title'],
             'body' => ['required','string'],
-            'image' => ['nullable',['image']],
-            'user_id' => ['required','int','exists:users,id']
+            'image' => ['nullable','image'],
+
         ];
     }
 }
