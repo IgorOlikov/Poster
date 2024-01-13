@@ -6,14 +6,9 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
-use App\Models\User;
 use App\Services\UploadPostImageService;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 
 class PostController extends Controller
@@ -65,9 +60,9 @@ class PostController extends Controller
     {
         $fields = $request->validated();
 
-        $postFields['image'] = (New UploadPostImageService())->updatePostImage($fields['image'],$post);
+        $fields['image'] = (New UploadPostImageService())->updatePostImage($fields['image'],$post);
 
-        $post->update($postFields);
+        $post->update($fields);
 
         return redirect()->route('posts.show',$post);
     }
