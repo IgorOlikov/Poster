@@ -1,21 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class UploadAvatarRequest extends FormRequest
+class PostDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        if (!Auth::check()) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     /**
@@ -26,7 +22,7 @@ class UploadAvatarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => ['required','image']
+            //
         ];
     }
 }

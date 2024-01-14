@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Comment;
 
 
-use App\Models\Comment;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreCommentRequest extends FormRequest
+class CommentStoreRequest extends FormRequest
 {
     public function authorize(): bool
     {

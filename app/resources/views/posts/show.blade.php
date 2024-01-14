@@ -14,7 +14,6 @@
         </form>
     @endif
 
-
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition duration-300  rounded overflow-hidden shadow-lg">
         <div class="py-4 px-8">
             <a href="{{ route('user.show',$post->owner) }}">
@@ -33,12 +32,7 @@
 
     <div class="antialiased  max-w-screen-sm mt-20">
         <h3 class="text-lg font-semibold text-gray-900">Comments</h3>
-
         <div class="space-y-4 mt-10">
-
-
-
-
         </div>
     </div>
       <a href="{{ route('posts.comments.create',$post) }}">Create Comment</a>
@@ -46,11 +40,7 @@
     @include('comments.parent_comments')
 
     </div>
-
-
     </div>
     </div>
-
-
     </body>
     </html>

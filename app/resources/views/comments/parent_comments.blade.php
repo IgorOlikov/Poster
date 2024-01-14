@@ -9,7 +9,6 @@
         <a href="{{ route('user.show',$comment->comment_owner->id) }}"><strong>{{ $comment->comment_owner->name }}</strong></a> <span class="text-xs text-gray-400">{{ $comment->created_at }}</span>
         <p class="text-sm">{{ $comment->parent_id }} {{ $comment->comment }}</p>
 
-
         <a href="{{ route('posts.comments.children.create',[$post,$comment]) }}">Comment</a>
 
         @auth()

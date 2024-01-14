@@ -2,18 +2,22 @@
 
 namespace App\Http\Requests;
 
-
-use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-
-class StorePostRequest extends FormRequest
+class AvatarUploadRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
-        return Auth::check();
+        if (!Auth::check()) {
+            return false;
+        }
+        return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,10 +26,7 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','string','unique:posts,title'],
-            'body' => ['required','string'],
-            'image' => ['prohibited'],
-
+            'image' => ['required','image']
         ];
     }
 }

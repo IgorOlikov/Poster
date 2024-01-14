@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Post;
 
-use App\Http\Requests\CreatePostRequest;
-use App\Http\Requests\PostUpdateRequest;
-use App\Http\Requests\StorePostRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\PostStoreRequest;
+use App\Http\Requests\Post\PostUpdateRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Services\UploadPostImageService;
-
-use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Request;
 
 
 class PostController extends Controller
@@ -21,13 +20,13 @@ class PostController extends Controller
         return view('posts.index',compact('posts'));
     }
 
-    public function create(CreatePostRequest $request)
+    public function create(Request $request)
     {
         $user = $request->user();
 
         return view('posts.create',compact('user'));
     }
-    public function store(StorePostRequest $request)
+    public function store(PostStoreRequest $request)
     {
         $imagePath = (New UploadPostImageService())->storePostImage($request->validated('image'));
 
