@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 
+use App\Models\Comment;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,10 +11,7 @@ class StoreCommentRequest extends FormRequest
 {
     public function authorize(): bool
     {
-       if (!Auth::check()){
-           return false;
-       }
-        return true;
+       return Auth::check();
     }
 
     /**

@@ -2,9 +2,7 @@
 
 namespace App\Observers;
 
-use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
-use Illuminate\Http\Client\Request;
 use Illuminate\Support\Str;
 
 class PostObserver

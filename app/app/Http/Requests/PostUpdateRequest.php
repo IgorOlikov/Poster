@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class PostUpdateRequest extends FormRequest
 {
@@ -13,10 +12,10 @@ class PostUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if(!($this->post->user_id) === ($this->user()->id)){
+            if (Auth::check()) {
+                return $this->user()->can('update', $this->route('post'));
+            }
             return false;
-        }
-        return true;
     }
 
     /**

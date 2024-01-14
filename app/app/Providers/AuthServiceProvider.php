@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Comment;
+use App\Models\Post;
 use App\Models\User;
+use App\Policies\CommentPolicy;
+use App\Policies\PostPolicy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 //use Illuminate\Auth\Access\Gate;
@@ -16,7 +20,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        Post::class => PostPolicy::class,
+        Comment::class => CommentPolicy::class,
+
     ];
 
     /**

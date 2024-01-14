@@ -60,16 +60,18 @@ class PostController extends Controller
     {
         $fields = $request->validated();
 
-        $fields['image'] = (New UploadPostImageService())->updatePostImage($fields['image'],$post);
+        $fields['image'] = (New UploadPostImageService())->updatePostImage($request->validated('image'),$post);
 
         $post->update($fields);
 
         return redirect()->route('posts.show',$post);
     }
 
-    public function destroy(Post $post)
+    public function destroy(Post $post,UploadPostImageService $imageService)
     {
-        (New UploadPostImageService())->deletePostImage($post->image); //-> del in model
+        $imageService->deletePostImage($post->image);
+
+        //(New UploadPostImageService())->deletePostImage($post->image); //-> del in model
 
         $post->delete();
 
