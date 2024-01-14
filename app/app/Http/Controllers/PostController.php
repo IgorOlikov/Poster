@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Comment;
@@ -20,7 +21,7 @@ class PostController extends Controller
         return view('posts.index',compact('posts'));
     }
 
-    public function create(Request $request)
+    public function create(CreatePostRequest $request)
     {
         $user = $request->user();
 
