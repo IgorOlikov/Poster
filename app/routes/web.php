@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Comment\CommentController;
 use App\Http\Controllers\HomeController;
-
 use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UploadUserAvatar;
@@ -20,8 +19,8 @@ Route::get('/', [HomeController::class,'index'])
 Route::get('/users/{user}',[UserController::class,'show'])->name('user.show');
 
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
+Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create')->middleware('auth');
 Route::get('/posts/{post}',[PostController::class, 'show'])->name('posts.show');
-
 Route::get('/posts/{post}/comments',[CommentController::class, 'index'])->name('posts.comments.index');
 
 //PROTECTED
@@ -33,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/avatar/create',[UserController::class,'createImage'])->name('create-image.profile.image');
     Route::post('/avatar/upload',UploadUserAvatar::class)->name('upload.profile.image');
 
-    Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create')->middleware('auth');
+
     Route::post('/posts',[PostController::class, 'store'])->name('posts.store');
     Route::get('/posts/{post}/edit',[PostController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{post}',[PostController::class, 'update'])->name('posts.update');

@@ -8,7 +8,9 @@ use App\Http\Requests\Post\PostUpdateRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Services\UploadPostImageService;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
+
+
 
 
 class PostController extends Controller
