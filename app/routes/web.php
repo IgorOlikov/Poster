@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\UploadUserAvatarAction;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Comment\CommentController;
 use App\Http\Controllers\HomeController;
@@ -30,8 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/avatar/create',[UserController::class,'createImage'])->name('create-image.profile.image');
-    Route::post('/avatar/upload',UploadUserAvatar::class)->name('upload.profile.image');
-
+    Route::post('/avatar/upload', UploadUserAvatarAction::class)->name('upload.profile.image');
 
     Route::post('/posts',[PostController::class, 'store'])->name('posts.store');
     Route::get('/posts/{post}/edit',[PostController::class, 'edit'])->name('posts.edit');

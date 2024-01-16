@@ -3,16 +3,28 @@
 namespace App\Observers;
 
 use App\Models\Post;
+use App\Services\UploadPostImageService;
 use Illuminate\Support\Str;
 
 class PostObserver
 {
 
-    public function creating(Post $post): void
+    public function __construct(
+        protected UploadPostImageService $postImageService,
+    )
+    {
+
+    }
+
+    public function creating(Post $post) :void
     {
         $post->slug = Str::slug($post->title);
     }
 
+    public function deleting(Post $post) :void
+    {
+        $this->postImageService->deletePostImage($post->image);
+    }
 
 
     /**

@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Actions;
 
-use App\Http\Requests\AvatarUploadRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\UploadUserAvatarActionRequest;
 use Illuminate\Support\Facades\Storage;
 
-class UploadUserAvatar extends Controller
+class UploadUserAvatarAction
 {
-
-    public function __invoke(AvatarUploadRequest $request)
+    public function __invoke(UploadUserAvatarActionRequest $request)
     {
         if ($request->hasFile('image')){
             $oldAvatar= $request->user()->avatar;

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class AvatarUploadRequest extends FormRequest
+class UploadUserAvatarActionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -23,7 +23,7 @@ class PostStoreRequest extends FormRequest
         return [
             'title' => ['required','string','unique:posts,title'],
             'body' => ['required','string'],
-            'image' => ['prohibited'],
+            'image' => ['sometimes','image'],
 
         ];
     }

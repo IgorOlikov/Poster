@@ -24,9 +24,7 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
-        $user = $request->user();
-
-        return view('posts.create',compact('user'));
+        return view('posts.create',['user' => $request->user()]);
     }
     public function store(PostStoreRequest $request)
     {
@@ -38,7 +36,6 @@ class PostController extends Controller
            'title' => $request->validated('title'),
            'body' => $request->validated('body'),
         ]);
-
         return redirect()->route('posts.show',$post->id);
     }
 
@@ -69,12 +66,8 @@ class PostController extends Controller
         return redirect()->route('posts.show',$post);
     }
 
-    public function destroy(Post $post,UploadPostImageService $imageService)
+    public function destroy(Post $post)
     {
-        $imageService->deletePostImage($post->image);
-
-        //(New UploadPostImageService())->deletePostImage($post->image); //-> del in model
-
         $post->delete();
 
         return redirect()->route('posts');
