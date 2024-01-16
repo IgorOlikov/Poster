@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Comment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Comment\CommentStoreRequest;
+use App\Http\Requests\Comment\CommentUpdateRequest;
 use App\Jobs\CommentReplyNotificationJob;
 use App\Mail\CommentReplied;
 use App\Models\Comment;
@@ -40,7 +41,6 @@ class CommentController extends Controller
             'post_id' => $comment->post_id,
             'user_id' => $request->user()->id,
         ]);
-
         return redirect()->route('posts.show',$post->id);
     }
 
@@ -65,20 +65,17 @@ class CommentController extends Controller
         return view('post-comments.edit',compact('post','comment'));
     }
 
-    public function update(Request $request,Comment $comment)
+    public function update(CommentUpdateRequest $request,Comment $comment)
     {
-        $attributes = $request->validate([
-           'comment' => ['required','string','max:255'],
-        ]);
-        $comment->update($attributes);
+        $comment->update($request->validated());
 
-        return redirect("posts/$comment->post_id");
+        return redirect()->route('posts.show',$comment->post_id);
     }
 
     public function destroy(Comment $comment)
     {
         $comment->delete();
 
-        return redirect("posts/$comment->post_id");
+        return redirect()->route('posts.show',$comment->post_id);
     }
 }

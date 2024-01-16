@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PostDeleteRequest extends FormRequest
 {
@@ -11,6 +12,9 @@ class PostDeleteRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if (Auth::check()) {
+            return $this->user()->can('delete', $this->route('post'));
+        }
         return false;
     }
 
