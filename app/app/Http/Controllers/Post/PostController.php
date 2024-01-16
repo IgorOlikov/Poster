@@ -10,9 +10,6 @@ use App\Models\Post;
 use App\Services\UploadPostImageService;
 use Illuminate\Http\Request;
 
-
-
-
 class PostController extends Controller
 {
     public function index()

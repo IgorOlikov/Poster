@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Comment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Comment\CommentStoreRequest;
+use App\Jobs\CommentReplyNotificationJob;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -29,6 +30,12 @@ class CommentController extends Controller
 
     public function store_children(CommentStoreRequest $request, Post $post, Comment $comment)
     {
+
+
+        dispatch(new CommentReplyNotificationJob($comment,$request->user()));
+
+        exit();
+
         $comment->child_comments()->create([
             'comment' =>  $request->validated('comment'),
             'post_id' => $comment->post_id,
