@@ -34,7 +34,6 @@ class CommentReplyNotificationJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to('fake@mail.ru')->send(new CommentReplied($this->commentator,$this->parentComment));
-
+        Mail::to($this->parentComment->comment_owner()->email)->send(new CommentReplied($this->commentator,$this->parentComment));
     }
 }
