@@ -35,12 +35,6 @@ class Comment extends Model
         return $this->hasMany(Comment::class,'parent_id','id')->with('child_comments');
     }
 
-    public function child_comments_paginate()
-    {
-        return $this->hasMany(Comment::class,'parent_id','id')->with('child_comments_paginate')->paginate(5);
-    }
-
-
     public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class,'post_id','id');
