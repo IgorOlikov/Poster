@@ -14,7 +14,7 @@
         @auth()
             @can('update',$comment)
         <a href="{{ route('posts.comments.edit',[$post,$comment]) }}">Edit</a>
-            @elsecan('delete',$comment)
+
         <form method="post" action="{{ route('comments.destroy',$comment) }}">
             @csrf
             @method('DELETE')

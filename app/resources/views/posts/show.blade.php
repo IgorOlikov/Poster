@@ -9,7 +9,7 @@
         <a href="{{ route('posts.edit',$post) }}">
         <button>Edit Post</button>
         </a>
-        @elsecan('delete', $post)
+
         <form action="{{ route('posts.destroy',$post) }}" method="post">
             @csrf
             @method('DELETE')
