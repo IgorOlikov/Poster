@@ -6,7 +6,6 @@ use App\Http\Controllers\Comment\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UploadUserAvatar;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
