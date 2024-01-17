@@ -12,15 +12,15 @@
         <a href="{{ route('posts.comments.children.create',[$post,$comment]) }}">Comment</a>
 
         @auth()
-            @if((Auth::user()->id === $comment->user_id) || (Auth::user()->is_admin))
+            @can('update',$comment)
         <a href="{{ route('posts.comments.edit',[$post,$comment]) }}">Edit</a>
-
+            @elsecan('delete',$comment)
         <form method="post" action="{{ route('comments.destroy',$comment) }}">
             @csrf
             @method('DELETE')
             <button type="submit">Delete</button>
         </form>
-            @endif
+            @endcan
         @endauth
 
     </div>

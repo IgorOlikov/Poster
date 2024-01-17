@@ -3,17 +3,20 @@
 
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
-@if((Auth::check()) && (Auth::user()->id === $post->user_id))
+
+    @auth()
+        @can('update', $post)
         <a href="{{ route('posts.edit',$post) }}">
         <button>Edit Post</button>
         </a>
+        @elsecan('delete', $post)
         <form action="{{ route('posts.destroy',$post) }}" method="post">
             @csrf
             @method('DELETE')
             <button type="submit">Delete Post</button>
         </form>
-    @endif
-
+        @endcan
+    @endauth
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition duration-300  rounded overflow-hidden shadow-lg">
         <div class="py-4 px-8">
             <a href="{{ route('user.show',$post->owner) }}">
